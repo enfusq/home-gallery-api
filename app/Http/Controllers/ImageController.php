@@ -27,10 +27,11 @@ class ImageController extends Controller
 
         $file = $request->file('image');
         $path = $file->store('images', 'public');
+        $baseUrl = config('app.url');
 
         $image = Image::create([
             'user_id' => auth()->id() ?? 1, //1 is test user id
-            'image_path' => $path,
+            'image_path' => $baseUrl . '/storage/' . $path,
             'original_name' => $file->getClientOriginalName(),
             'taken_at' => $request->taken_at
         ]);

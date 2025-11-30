@@ -31,8 +31,10 @@ class ImageFactory extends Factory
         // Save file to storage
         Storage::disk('public')->put("images/$filename", $response->body());
 
+        $baseUrl = config('app.url');
+
         return [
-            'image_path' => 'images/' . $filename,
+            'image_path' => $baseUrl. '/storage/images/' . $filename,
             'user_id' => 1,
             'original_name' => $this->faker->word() . '.jpg',
             'taken_at' => $this->faker->dateTimeThisDecade()
