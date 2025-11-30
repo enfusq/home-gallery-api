@@ -35,7 +35,7 @@ class ImageFactory extends Factory
             'image_path' => 'images/' . $filename,
             'user_id' => 1,
             'original_name' => $this->faker->word() . '.jpg',
-            'datetime' => $this->faker->dateTimeThisDecade()
+            'taken_at' => $this->faker->dateTimeThisDecade()
         ];
     }
 }

@@ -32,7 +32,7 @@ class ImageController extends Controller
             'user_id' => auth()->id() ?? 1, //1 is test user id
             'image_path' => $path,
             'original_name' => $file->getClientOriginalName(),
-            'datetime' => $request->taken_at
+            'taken_at' => $request->taken_at
         ]);
 
         return response()->json([

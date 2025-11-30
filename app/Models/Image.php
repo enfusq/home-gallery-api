@@ -10,5 +10,5 @@ class Image extends Model
     /** @use HasFactory<\Database\Factories\ImageFactory> */
     use HasFactory;
 
-    protected $fillable = ['image_path', 'user_id', 'original_name', 'datetime'];
+    protected $fillable = ['image_path', 'user_id', 'original_name', 'taken_at'];
 }
