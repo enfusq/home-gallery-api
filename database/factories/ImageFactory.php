@@ -2,8 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Image>
@@ -17,10 +19,21 @@ class ImageFactory extends Factory
      */
     public function definition(): array
     {
-        $userId = 1;
+         // Ensure directory exists
+        Storage::makeDirectory('public/images');
+
+        // Download from API (Picsum example)
+        $response = Http::get('https://picsum.photos/640/480');
+
+        // Unique filename
+        $filename = Str::uuid() . '.jpg';
+
+        // Save file to storage
+        Storage::disk('public')->put("images/$filename", $response->body());
+
         return [
-            'image_path' => 'images/' . $this->faker->uuid(). '.jpg',
-            'user_id' => $userId,
+            'image_path' => 'images/' . $filename,
+            'user_id' => 1,
             'original_name' => $this->faker->word() . '.jpg',
             'datetime' => $this->faker->dateTimeThisDecade()
         ];
